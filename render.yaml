@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: bomber-quiz-api
+    name: bomberquiz-api
     env: node
     buildCommand: npm install -g pnpm && pnpm install && pnpm build
     startCommand: pnpm start

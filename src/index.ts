@@ -1,6 +1,8 @@
 // src/index.ts
-import "module-alias/register";
+// Registrar aliases primeiro, antes de qualquer importação
+import "./register-aliases";
 
+// Depois importar os outros módulos
 import { startServer } from "./main/server";
 
 // Função principal para iniciar o servidor
@@ -14,7 +16,6 @@ export async function main(): Promise<void> {
 }
 
 // Executar a função principal apenas se este arquivo for executado diretamente
-// Isso permite testar a lógica sem iniciar o servidor
 /* istanbul ignore next */
 if (require.main === module) {
   main();

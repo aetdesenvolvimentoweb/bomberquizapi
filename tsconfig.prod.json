@@ -1,9 +1,9 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["dist/*"]
-    }
-  }
+    "sourceMap": false,
+    "inlineSources": false,
+    "removeComments": true
+  },
+  "exclude": ["**/*.spec.ts", "**/*.test.ts", "src/**/__tests__/**"]
 }
