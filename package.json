@@ -17,7 +17,7 @@
     "start": "node dist/index.js"
   },
   "_moduleAliases": {
-    "@": "dist"
+    "@": "src"
   },
   "keywords": [],
   "author": "",
