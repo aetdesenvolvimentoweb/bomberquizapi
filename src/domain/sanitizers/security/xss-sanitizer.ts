@@ -57,5 +57,5 @@ export interface XssSanitizerUseCase {
    *
    * @throws {Error} Pode lançar erro se o texto não puder ser processado corretamente
    */
-  sanitize: (text: string) => Promise<string>;
+  sanitize: (text: string) => string;
 }
