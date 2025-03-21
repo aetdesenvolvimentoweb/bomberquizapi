@@ -14,7 +14,7 @@
     "prepare": "husky",
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "TS_NODE_PROJECT=tsconfig.prod.json node -r tsconfig-paths/register dist/index.js"
   },
   "_moduleAliases": {
     "@": "src"
