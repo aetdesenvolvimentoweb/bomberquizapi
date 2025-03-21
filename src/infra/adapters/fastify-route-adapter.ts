@@ -3,7 +3,7 @@ import { FastifyReply, FastifyRequest, RouteHandlerMethod } from "fastify";
 
 import { Controller } from "@/presentation/protocols";
 
-export const fastiftRouteAdapter = (
+export const fastifyRouteAdapter = (
   controller: Controller,
 ): RouteHandlerMethod => {
   return async (
