@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: bomber-quiz-api
+    env: node
+    buildCommand: npm install -g pnpm && pnpm install && pnpm build
+    startCommand: pnpm start
+    envVars:
+      - key: NODE_ENV
+        value: production
