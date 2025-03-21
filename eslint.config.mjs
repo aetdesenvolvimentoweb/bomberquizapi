@@ -37,7 +37,15 @@ export default defineConfig([
       "@typescript-eslint/explicit-function-return-type": "warn",
       "@typescript-eslint/no-unused-vars": [
         "error",
-        { argsIgnorePattern: "^_" },
+        {
+          vars: "all",
+          args: "after-used",
+          ignoreRestSiblings: true,
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          // Isso faz com que importações não utilizadas também sejam detectadas
+          caughtErrors: "all",
+        },
       ],
       "@typescript-eslint/no-explicit-any": "warn",
     },
