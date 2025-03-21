@@ -1,6 +1,9 @@
-import { defineConfig } from "eslint/config";
-import globals from "globals";
 import js from "@eslint/js";
+import { defineConfig } from "eslint/config";
+import prettierConfig from "eslint-config-prettier";
+import prettierPlugin from "eslint-plugin-prettier";
+import simpleImportSort from "eslint-plugin-simple-import-sort";
+import globals from "globals";
 import tseslint from "typescript-eslint";
 
 export default defineConfig([
@@ -39,6 +42,35 @@ export default defineConfig([
       "@typescript-eslint/no-explicit-any": "warn",
     },
   },
+
+  // Configuração do plugin simple-import-sort
+  {
+    files: ["**/*.{js,mjs,cjs,ts}"],
+    plugins: {
+      "simple-import-sort": simpleImportSort,
+    },
+    rules: {
+      "simple-import-sort/imports": "error",
+      "simple-import-sort/exports": "error",
+      // Desabilitar regras de sort do ESLint que possam conflitar
+      "sort-imports": "off",
+      "import/order": "off",
+    },
+  },
+
+  // Integração com Prettier
+  {
+    files: ["**/*.{js,mjs,cjs,ts}"],
+    plugins: {
+      prettier: prettierPlugin,
+    },
+    rules: {
+      "prettier/prettier": "error",
+    },
+  },
+
+  // Desabilitar regras do ESLint que podem conflitar com o Prettier
+  prettierConfig,
 
   // Ignorar arquivos de configuração e construção
   {
