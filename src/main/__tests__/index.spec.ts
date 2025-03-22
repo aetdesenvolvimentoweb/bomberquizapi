@@ -1,6 +1,6 @@
 // src/__tests__/index.spec.ts
-import { main } from "../main/index";
-import { startServer } from "../main/server";
+import { main } from "../index";
+import { startServer } from "../server";
 
 // Mock das dependências
 jest.mock("../main/server", () => ({
