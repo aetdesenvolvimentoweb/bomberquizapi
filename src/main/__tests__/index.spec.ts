@@ -3,7 +3,7 @@ import { main } from "../index";
 import { startServer } from "../server";
 
 // Mock das dependências
-jest.mock("../main/server", () => ({
+jest.mock("../server", () => ({
   startServer: jest.fn().mockResolvedValue(undefined),
 }));
 
