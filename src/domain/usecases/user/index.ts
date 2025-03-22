@@ -15,3 +15,6 @@ export * from "./user-find-by-email";
 
 /** Exporta o caso de uso para listagem de usuários */
 export * from "./user-list-usecase";
+
+/** Exporta o caso de uso para autenticação de usuários */
+export * from "./user-authenticate-usecase";
