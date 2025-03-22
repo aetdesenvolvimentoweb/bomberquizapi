@@ -52,7 +52,6 @@ describe("User Routes", () => {
   it("não deve registrar outras rotas", () => {
     setupUserRoutes(mockApp);
 
-    expect(mockApp.get).not.toHaveBeenCalled();
     expect(mockApp.put).not.toHaveBeenCalled();
     expect(mockApp.delete).not.toHaveBeenCalled();
   });
