@@ -43,10 +43,17 @@ import { UserRepository } from "@/domain/repositories";
 
 /**
  * Repositório de usuários em memória para testes
+ *
+ * Implementação concreta da interface UserRepository que utiliza
+ * estruturas de dados em memória para simular operações de persistência.
  */
 export class InMemoryUserRepository implements UserRepository {
   /**
    * Array que armazena os usuários em memória
+   *
+   * Esta estrutura de dados representa a "tabela" de usuários
+   * e mantém o estado durante o ciclo de vida da instância.
+   *
    * @private
    */
   private users: User[] = [];
@@ -55,7 +62,14 @@ export class InMemoryUserRepository implements UserRepository {
    * Cria um novo usuário no repositório
    *
    * @param {UserCreateData} data - Dados do usuário a ser criado
-   * @returns {Promise<void>} - Promise que resolve quando o usuário é criado
+   * @returns {Promise<void>} - Promise que resolve quando o usuário é criado com sucesso
+   *
+   * @remarks
+   * Este método gera automaticamente:
+   * - Um ID único usando crypto.randomUUID()
+   * - Uma URL de avatar padrão
+   * - Uma role (função) padrão para o usuário
+   * - Carimbos de data/hora de criação e atualização
    */
   public readonly create = async (data: UserCreateData): Promise<void> => {
     this.users.push({
@@ -72,7 +86,10 @@ export class InMemoryUserRepository implements UserRepository {
    * Busca um usuário pelo endereço de e-mail
    *
    * @param {string} email - E-mail do usuário a ser encontrado
-   * @returns {Promise<User | null>} - Promise que resolve para o usuário encontrado ou null
+   * @returns {Promise<User | null>} - Promise que resolve para o usuário encontrado ou null caso não exista
+   *
+   * @remarks
+   * A busca é case-sensitive e deve corresponder exatamente ao e-mail armazenado.
    */
   public readonly findByEmail = async (email: string): Promise<User | null> => {
     return this.users.find((user) => user.email === email) || null;
@@ -81,12 +98,30 @@ export class InMemoryUserRepository implements UserRepository {
   /**
    * Lista todos os usuários do sistema
    *
-   * @returns {Promise<User[]>} - Promise que resolve para um array de usuários
+   * @returns {Promise<UserMapped[]>} - Promise que resolve para um array de usuários mapeados
+   *
+   * @remarks
+   * Este método retorna uma versão mapeada de cada usuário, utilizando o método privado
+   * mapUser para converter os objetos User para UserMapped. O array retornado pode estar
+   * vazio se não houver usuários cadastrados no repositório.
    */
   public readonly list = async (): Promise<UserMapped[]> => {
     return this.users.map((user) => this.mapUser(user));
   };
 
+  /**
+   * Mapeia um objeto User para UserMapped
+   *
+   * @param {User} user - O objeto usuário a ser mapeado
+   * @returns {UserMapped} - O objeto usuário mapeado
+   *
+   * @private
+   *
+   * @remarks
+   * Este método é utilizado para transformar o modelo interno User
+   * em UserMapped, garantindo que apenas os campos necessários sejam expostos
+   * e mantendo a consistência dos tipos retornados pelo repositório.
+   */
   private mapUser(user: User): UserMapped {
     return {
       id: user.id,

@@ -27,6 +27,5 @@ export const makeUserListController = (): Controller => {
   const userListService = makeUserListService(loggerProvider);
   return new UserListController({
     userListService,
-    loggerProvider,
   });
 };

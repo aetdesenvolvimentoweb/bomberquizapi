@@ -130,6 +130,76 @@ describe("InMemoryUserRepository", () => {
     });
   });
 
+  // Nova seção de testes para o método list
+  describe("list method", () => {
+    it("deve retornar um array vazio quando não houver usuários", async () => {
+      // Arrange - repositório vazio
+
+      // Act
+      const users = await repository.list();
+
+      // Assert
+      expect(users).toEqual([]);
+    });
+
+    it("deve retornar todos os usuários cadastrados", async () => {
+      // Arrange
+      const secondUser: UserCreateData = {
+        name: "Maria Oliveira",
+        email: "maria@example.com",
+        phone: "+5511912345678",
+        birthdate: new Date("1992-05-15"),
+        password: "Senha@456",
+      };
+
+      await repository.create(userData);
+      await repository.create(secondUser);
+
+      // Act
+      const users = await repository.list();
+
+      // Assert
+      expect(users.length).toBe(2);
+      expect(users[0].name).toBe(userData.name);
+      expect(users[1].name).toBe(secondUser.name);
+    });
+
+    it("deve retornar usuários mapeados sem incluir a senha", async () => {
+      // Arrange
+      await repository.create(userData);
+
+      // Act
+      const users = await repository.list();
+
+      // Assert
+      expect(users.length).toBe(1);
+      expect(users[0].email).toBe(userData.email);
+      // Verificar que a senha não está sendo retornada
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect((users[0] as any).password).toBeUndefined();
+    });
+
+    it("deve retornar usuários com todos os campos mapeados corretamente", async () => {
+      // Arrange
+      await repository.create(userData);
+
+      // Act
+      const users = await repository.list();
+      const user = users[0];
+
+      // Assert
+      expect(user.id).toBeDefined();
+      expect(user.name).toBe(userData.name);
+      expect(user.email).toBe(userData.email);
+      expect(user.phone).toBe(userData.phone);
+      expect(user.birthdate).toEqual(userData.birthdate);
+      expect(user.avatarUrl).toBeDefined();
+      expect(user.role).toBe(UserRole.CLIENTE);
+      expect(user.createdAt).toBeInstanceOf(Date);
+      expect(user.updatedAt).toBeInstanceOf(Date);
+    });
+  });
+
   describe("comportamento do repositório", () => {
     it("deve manter os dados entre diferentes chamadas de métodos", async () => {
       // Arrange

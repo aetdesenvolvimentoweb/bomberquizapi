@@ -8,7 +8,7 @@
 
 import { ApplicationError } from "@/domain/errors";
 
-import { created, handleError, serverError } from "../http-responses";
+import { created, handleError, ok, serverError } from "../http-responses";
 
 // Mock para Date.toISOString para tornar os testes determinísticos
 const mockDate = new Date("2023-01-01T00:00:00.000Z");
@@ -24,7 +24,7 @@ describe("HTTP Responses", () => {
         return mockDate;
       }
 
-      toISOString() {
+      toISOString(): string {
         return "2023-01-01T00:00:00.000Z";
       }
     } as DateConstructor;
@@ -34,6 +34,48 @@ describe("HTTP Responses", () => {
     // Restaurar implementações originais
     global.Date.now = originalDateNow;
     Date.prototype.toISOString = originalToISOString;
+  });
+
+  describe("ok", () => {
+    it("deve retornar uma resposta com status 200 e success true", () => {
+      // Arrange
+      const emptyData = null; // Fornecendo um valor null como data
+
+      // Act
+      const httpResponse = ok(emptyData);
+
+      // Assert
+      expect(httpResponse).toEqual({
+        body: {
+          success: true,
+          data: null,
+          metadata: {
+            timestamp: "2023-01-01T00:00:00.000Z",
+          },
+        },
+        statusCode: 200,
+      });
+    });
+
+    it("deve incluir o data passado como parâmetro na resposta", () => {
+      // Arrange
+      const mockData = { id: 1, name: "Test" };
+
+      // Act
+      const httpResponse = ok(mockData);
+
+      // Assert
+      expect(httpResponse).toEqual({
+        body: {
+          success: true,
+          data: mockData,
+          metadata: {
+            timestamp: "2023-01-01T00:00:00.000Z",
+          },
+        },
+        statusCode: 200,
+      });
+    });
   });
 
   describe("created", () => {

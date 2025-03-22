@@ -23,10 +23,10 @@ export interface User {
   phone: string;
   /** Data de nascimento do usuário */
   birthdate: Date;
-  /** URL da imagem de avatar do usuário (opcional) */
-  avatarUrl?: string;
-  /** Papel/função do usuário no sistema (opcional) */
-  role?: UserRole;
+  /** URL da imagem de avatar do usuário */
+  avatarUrl: string;
+  /** Papel/função do usuário no sistema */
+  role: UserRole;
   /** Senha criptografada do usuário */
   password: string;
   /** Data de criação do registro do usuário */

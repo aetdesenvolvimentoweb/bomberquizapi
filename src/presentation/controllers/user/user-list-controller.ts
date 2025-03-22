@@ -11,7 +11,6 @@
 
 import { UserListService } from "@/data/services";
 import { UserMapped } from "@/domain/entities";
-import { LoggerProvider } from "@/domain/providers";
 import { handleError, ok } from "@/presentation/helpers";
 import {
   Controller,
@@ -27,8 +26,6 @@ import {
 interface UserListControllerProps {
   /** Serviço responsável pela lógica de listagem de usuários */
   userListService: UserListService;
-  /** Provedor de logs para registro de eventos e erros */
-  loggerProvider: LoggerProvider;
 }
 
 /**
@@ -54,9 +51,7 @@ export class UserListController implements Controller {
     _request: HttpRequest,
   ): Promise<HttpResponse<UserMapped[]>> => {
     try {
-      this.props.loggerProvider.info("Listing users...");
       const users = await this.props.userListService.list();
-      this.props.loggerProvider.info("Users listed successfully!");
       return ok<UserMapped[]>(users);
     } catch (error) {
       return handleError(error);
