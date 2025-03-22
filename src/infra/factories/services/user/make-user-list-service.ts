@@ -1,6 +1,6 @@
-import { InMemoryUserRepository } from "@/data/repositories";
 import { UserListService } from "@/data/services";
 import { LoggerProvider } from "@/domain/providers";
+import { PrismaUserRepository } from "@/infra/repositories";
 
 /**
  * Factory function that creates and configures a UserListService with all necessary dependencies.
@@ -27,6 +27,6 @@ import { LoggerProvider } from "@/domain/providers";
 export const makeUserListService = (
   loggerProvider: LoggerProvider,
 ): UserListService => {
-  const userRepository = new InMemoryUserRepository();
+  const userRepository = new PrismaUserRepository();
   return new UserListService({ userRepository, loggerProvider });
 };

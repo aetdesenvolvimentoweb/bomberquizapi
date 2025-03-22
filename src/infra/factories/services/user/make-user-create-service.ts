@@ -1,4 +1,3 @@
-import { InMemoryUserRepository } from "@/data/repositories";
 import { UserCreateDataSanitizer } from "@/data/sanitizers";
 import { UserCreateService } from "@/data/services";
 import {
@@ -13,6 +12,7 @@ import {
   ValidatorEmailValidatorAdapter,
 } from "@/infra/adapters";
 import { Argon2Hash } from "@/infra/providers";
+import { PrismaUserRepository } from "@/infra/repositories";
 import { DOMPurifyXssSanitizer } from "@/infra/sanitizers";
 
 /**
@@ -51,7 +51,7 @@ export const makeUserCreateService = (
   const hashProvider = new Argon2Hash();
   const xssSanitizer = new DOMPurifyXssSanitizer();
   const userCreateDataSanitizer = new UserCreateDataSanitizer(xssSanitizer);
-  const userRepository = new InMemoryUserRepository();
+  const userRepository = new PrismaUserRepository();
   const userBirthdateValidator = new DateFnsBirthdateValidatorAdapter();
   const userEmailValidator = new ValidatorEmailValidatorAdapter();
   const userPasswordValidator = new PasswordValidatorAdapter();

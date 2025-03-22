@@ -13,7 +13,7 @@
     "test:coverage": "jest --coverage",
     "prepare": "husky",
     "dev": "NODE_ENV=development ts-node-dev -r tsconfig-paths/register --respawn --transpile-only src/main/index.ts",
-    "build": "rm -rf dist && tsc",
+    "build": "prisma generate && rm -rf dist && tsc",
     "start": "NODE_ENV=production node dist/main/index.js"
   },
   "_moduleAliases": {
@@ -45,6 +45,7 @@
     "jest": "^29.7.0",
     "lint-staged": "^15.5.0",
     "prettier": "^3.5.3",
+    "prisma": "^6.5.0",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.8.2",
@@ -53,6 +54,7 @@
   "dependencies": {
     "@fastify/cors": "^11.0.0",
     "@fastify/sensible": "^6.0.3",
+    "@prisma/client": "^6.5.0",
     "argon2": "^0.41.1",
     "date-fns": "^4.1.0",
     "dompurify": "^3.2.4",

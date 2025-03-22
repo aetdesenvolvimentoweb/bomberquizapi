@@ -103,8 +103,7 @@ export type UserUpdateRoleData = {
  * URL padrão para avatar de usuário quando nenhum for fornecido
  * @constant {string}
  */
-export const USER_DEFAULT_AVATAR_URL =
-  "/src/frontend/assets/images/default-avatar.png";
+export const USER_DEFAULT_AVATAR_URL = "/src/assets/images/default-avatar.png";
 
 /**
  * Papel/função padrão atribuído a novos usuários
