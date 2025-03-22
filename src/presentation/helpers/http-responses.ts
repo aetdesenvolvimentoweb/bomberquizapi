@@ -44,3 +44,16 @@ export const handleError = (error: unknown): HttpResponse => {
   // Se o erro não for ApplicationError, criar um ServerError
   return serverError(error);
 };
+
+export const ok = <T>(data: T): HttpResponse<T> => {
+  return {
+    body: {
+      success: true,
+      data,
+      metadata: {
+        timestamp: new Date().toISOString(),
+      },
+    },
+    statusCode: 200,
+  };
+};

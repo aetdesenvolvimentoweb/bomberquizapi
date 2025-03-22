@@ -37,3 +37,6 @@
 
 /** Exporta o serviço de criação de usuários */
 export * from "./user-create";
+
+/** Exporta o serviço de listagem de usuários */
+export * from "./user-list";
