@@ -37,6 +37,7 @@ import {
   USER_DEFAULT_AVATAR_URL,
   USER_DEFAULT_ROLE,
   UserCreateData,
+  UserMapped,
 } from "@/domain/entities";
 import { UserRepository } from "@/domain/repositories";
 
@@ -56,7 +57,7 @@ export class InMemoryUserRepository implements UserRepository {
    * @param {UserCreateData} data - Dados do usuário a ser criado
    * @returns {Promise<void>} - Promise que resolve quando o usuário é criado
    */
-  async create(data: UserCreateData): Promise<void> {
+  public readonly create = async (data: UserCreateData): Promise<void> => {
     this.users.push({
       ...data,
       id: crypto.randomUUID(),
@@ -65,7 +66,7 @@ export class InMemoryUserRepository implements UserRepository {
       createdAt: new Date(),
       updatedAt: new Date(),
     });
-  }
+  };
 
   /**
    * Busca um usuário pelo endereço de e-mail
@@ -73,7 +74,30 @@ export class InMemoryUserRepository implements UserRepository {
    * @param {string} email - E-mail do usuário a ser encontrado
    * @returns {Promise<User | null>} - Promise que resolve para o usuário encontrado ou null
    */
-  async findByEmail(email: string): Promise<User | null> {
+  public readonly findByEmail = async (email: string): Promise<User | null> => {
     return this.users.find((user) => user.email === email) || null;
+  };
+
+  /**
+   * Lista todos os usuários do sistema
+   *
+   * @returns {Promise<User[]>} - Promise que resolve para um array de usuários
+   */
+  public readonly list = async (): Promise<UserMapped[]> => {
+    return this.users.map((user) => this.mapUser(user));
+  };
+
+  private mapUser(user: User): UserMapped {
+    return {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
+      birthdate: user.birthdate,
+      avatarUrl: user.avatarUrl,
+      role: user.role,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+    };
   }
 }
