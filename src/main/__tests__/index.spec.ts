@@ -1,5 +1,5 @@
 // src/__tests__/index.spec.ts
-import { main } from "../index";
+import { main } from "../main/index";
 import { startServer } from "../main/server";
 
 // Mock das dependências

@@ -3,7 +3,7 @@
 import "./register-aliases";
 
 // Depois importar os outros módulos
-import { startServer } from "./main/server";
+import { startServer } from "./server";
 
 // Função principal para iniciar o servidor
 export async function main(): Promise<void> {
