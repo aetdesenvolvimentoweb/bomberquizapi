@@ -3,6 +3,7 @@ import { FastifyInstance } from "fastify";
 
 import { fastifyRouteAdapter } from "@/infra/adapters";
 import { makeUserCreateController } from "@/infra/factories/controllers";
+import { makeUserListController } from "@/infra/factories/controllers";
 
 import { setupUserRoutes } from "../user-routes";
 
@@ -23,6 +24,7 @@ describe("User Routes", () => {
     // Configurar mock do controller
     mockController = { handle: jest.fn() };
     (makeUserCreateController as jest.Mock).mockReturnValue(mockController);
+    (makeUserListController as jest.Mock).mockReturnValue(mockController);
 
     // Configurar mock do adapter
     adaptedHandler = { adapted: true };
