@@ -1,6 +1,6 @@
 import { InMemoryUserRepository } from "@/data/repositories";
 import { UserListService } from "@/data/services";
-import { ConsoleLogger } from "@/infra/providers";
+import { LoggerProvider } from "@/domain/providers";
 
 /**
  * Factory function that creates and configures a UserListService with all necessary dependencies.
@@ -24,8 +24,9 @@ import { ConsoleLogger } from "@/infra/providers";
  * // Use the service to list users
  * const users = await userService.list();
  */
-export const makeUserListService = (): UserListService => {
+export const makeUserListService = (
+  loggerProvider: LoggerProvider,
+): UserListService => {
   const userRepository = new InMemoryUserRepository();
-  const loggerProvider = new ConsoleLogger();
   return new UserListService({ userRepository, loggerProvider });
 };
