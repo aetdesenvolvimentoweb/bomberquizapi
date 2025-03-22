@@ -1,4 +1,8 @@
-import { UserCreateUseCase, UserFindByEmailUseCase } from "@/domain/usecases";
+import {
+  UserCreateUseCase,
+  UserFindByEmailUseCase,
+  UserListUseCase,
+} from "@/domain/usecases";
 
 /**
  * Interface de repositório para a entidade Usuário
@@ -11,10 +15,12 @@ import { UserCreateUseCase, UserFindByEmailUseCase } from "@/domain/usecases";
  * Este repositório agrega as seguintes funcionalidades:
  * - Criação de usuários ({@link UserCreateUseCase})
  * - Busca de usuários por e-mail ({@link UserFindByEmailUseCase})
+ * - Listagem de usuários ({@link UserListUseCase})
  *
  * @interface
  * @extends {UserCreateUseCase}
  * @extends {UserFindByEmailUseCase}
+ * @extends {UserListUseCase}
  *
  * @remarks
  * A implementação concreta deste repositório deve ser fornecida pela camada de
@@ -40,4 +46,6 @@ import { UserCreateUseCase, UserFindByEmailUseCase } from "@/domain/usecases";
  * }
  *
  */
-export type UserRepository = UserCreateUseCase & UserFindByEmailUseCase;
+export type UserRepository = UserCreateUseCase &
+  UserFindByEmailUseCase &
+  UserListUseCase;
