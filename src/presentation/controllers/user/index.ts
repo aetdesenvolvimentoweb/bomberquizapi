@@ -30,3 +30,6 @@
 
 /** Exporta o controlador para criação de usuários */
 export * from "./user-create-controller";
+
+/** Exporta o controlador para listagem de usuários */
+export * from "./user-list-controller";

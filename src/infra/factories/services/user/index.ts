@@ -31,6 +31,8 @@
  *
  * @module infra/factories/services/user
  * @see {@link ./make-user-create-service.ts} para detalhes de implementação da factory
+ * @see {@link ./make-user-list-service.ts} para detalhes de implementação da factory
  */
 
 export * from "./make-user-create-service";
+export * from "./make-user-list-service";
