@@ -21,6 +21,7 @@ import { UserCreateDataValidatorUseCase } from "@/domain/validators";
 const mockUserRepository: jest.Mocked<UserRepository> = {
   create: jest.fn(),
   findByEmail: jest.fn(),
+  list: jest.fn(),
 };
 
 const mockUserCreateDataSanitizer: jest.Mocked<UserCreateDataSanitizerUseCase> =

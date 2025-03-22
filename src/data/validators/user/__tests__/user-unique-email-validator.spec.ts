@@ -17,6 +17,7 @@ import { UserRepository } from "@/domain/repositories/user-repository";
 const mockUserRepository: jest.Mocked<UserRepository> = {
   findByEmail: jest.fn(),
   create: jest.fn(),
+  list: jest.fn(),
 };
 
 describe("UserUniqueEmailValidator", () => {
